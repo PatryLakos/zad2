@@ -6,10 +6,13 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-
+# Usuwamy stare setuptools i wymuszamy poprawną wersję
 RUN pip install --upgrade pip && \
-    pip install --upgrade setuptools==78.1.1 && \
-    pip install --prefix=/install -r requirements.txt
+    pip uninstall -y setuptools && \
+    pip install setuptools==78.1.1 && \
+    pip uninstall -y setuptools && \
+    pip install --no-cache-dir --prefix=/install setuptools==78.1.1 && \
+    pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 FROM python:3.11-alpine
 
