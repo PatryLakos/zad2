@@ -5,7 +5,6 @@ LABEL org.opencontainers.image.authors="Patryk Kaniosz"
 WORKDIR /app
 COPY requirements.txt .
 
-# Instalacja najnowszego pip, bezpiecznej wersji setuptools i wszystkich zależności
 RUN pip install --upgrade pip && \
     pip uninstall -y setuptools && \
     pip install setuptools==78.1.1 && \
@@ -13,10 +12,8 @@ RUN pip install --upgrade pip && \
 
 FROM python:3.11-alpine
 
-# Instalujemy tylko potrzebne pakiety, w tym bezpieczną wersję setuptools
 COPY --from=builder /install /usr/local
 
-# Upewniamy się, że tylko jedna wersja setuptools istnieje
 RUN pip install --upgrade pip && \
     pip uninstall -y setuptools && \
     pip install setuptools==78.1.1 && \
