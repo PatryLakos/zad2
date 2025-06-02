@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_NAME: ghcr.io/patrylakos/zad2
-  CACHE_REPO: patrylakos/zad2-cache
+  CACHE_REPO: patrykkan/zad2-cache
 
 jobs:
   build-and-push:
