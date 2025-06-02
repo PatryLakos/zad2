@@ -1,5 +1,4 @@
-ZAD 1
-# 🌦️ Pogoda App
+# Zadanie 1 – 🌦️ Pogoda App
 
 Aplikacja webowa w FastAPI, działająca w kontenerze Docker, umożliwiająca sprawdzenie aktualnej pogody dla wybranego miasta i kraju.
 
@@ -32,7 +31,6 @@ docker image ls pogoda-app
 
 http://localhost:8080
 
-ZAD 2
 # Zadanie 2 – Aplikacja FastAPI + Docker + GitHub Actions + Trivy
 
 ## 📦 Zawartość repozytorium
