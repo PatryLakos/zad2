@@ -11,6 +11,7 @@ Aplikacja webowa w FastAPI, działająca w kontenerze Docker, umożliwiająca sp
 - Stylizowany formularz HTML z prostym interfejsem
 - Logowanie daty uruchomienia, autora i portu do logów kontenera
 
+
 ---
 
 ## 🚀 Uruchomienie
