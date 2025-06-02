@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
+  IMAGE_NAME: ghcr.io/patrylakos/zad2
   CACHE_REPO: patrylakos/zad2-cache
 
 jobs:
