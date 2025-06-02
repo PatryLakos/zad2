@@ -3,3 +3,4 @@ httpx
 uvicorn
 pydantic==1.10.13
 python-multipart
+setuptools==78.1.1
