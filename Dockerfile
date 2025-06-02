@@ -4,7 +4,10 @@ LABEL org.opencontainers.image.authors="Patryk Kaniosz"
 
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install --prefix=/install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip uninstall -y setuptools && \
+    pip install --upgrade --prefix=/install -r requirements.txt
+
 
 FROM python:3.11-alpine
 
