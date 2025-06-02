@@ -87,5 +87,6 @@ Oba potrzebne są do cache'owania budowy obrazu.
 
 ## ☁️ Publikacja obrazu
 
-Obraz publikowany jest do:
+Obraz publikowany jest do: 
+ghcr.io/patrylakos/zad2:latest
 
