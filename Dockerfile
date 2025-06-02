@@ -6,9 +6,9 @@ WORKDIR /app
 
 COPY requirements.txt .
 
+
 RUN pip install --upgrade pip && \
-    pip uninstall -y setuptools && \
-    pip install setuptools==78.1.1 && \
+    pip install --upgrade setuptools==78.1.1 && \
     pip install --prefix=/install -r requirements.txt
 
 FROM python:3.11-alpine
