@@ -36,30 +36,26 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and export image to local for scan
+      # Budujemy lokalny obraz tylko dla amd64 do skanowania Trivy
+      - name: Build single-arch image locally for CVE scan
         uses: docker/build-push-action@v5
-        id: build
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: false
-          tags: ${{ env.IMAGE_NAME }}:latest
-          outputs: type=docker,dest=/tmp/image.tar
-          cache-from: type=registry,ref=${{ env.CACHE_REPO }}:cache
-          cache-to: type=registry,ref=${{ env.CACHE_REPO }}:cache,mode=max
+          tags: localbuild/zad2:scan
 
-      - name: Load image to Docker
-        run: docker load -i /tmp/image.tar
-
+      # Skan obrazu lokalnego (tylko jeśli nie ma błędów CRITICAL lub HIGH, przechodzi dalej)
       - name: Scan image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.IMAGE_NAME }}:latest
+          image-ref: localbuild/zad2:scan
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
 
+      # Jeśli Trivy OK — budujemy i wypychamy multiarch obraz do GHCR
       - name: Build and push multi-arch image to ghcr.io
         if: success()
         uses: docker/build-push-action@v5
