@@ -44,6 +44,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: false
+          load: true
           tags: localbuild/zad2:scan
 
       # Skan obrazu lokalnego (tylko jeśli nie ma błędów CRITICAL lub HIGH, przechodzi dalej)
