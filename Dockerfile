@@ -3,18 +3,19 @@ FROM python:3.11-slim as builder
 LABEL org.opencontainers.image.authors="Patryk Kaniosz"
 
 WORKDIR /app
-
 COPY requirements.txt .
 
-# Usuwamy stare setuptools i wymuszamy poprawną wersję
+# Upewniamy się, że używana jest tylko bezpieczna wersja setuptools
 RUN pip install --upgrade pip && \
     pip uninstall -y setuptools && \
     pip install setuptools==78.1.1 && \
-    pip uninstall -y setuptools && \
-    pip install --no-cache-dir --prefix=/install setuptools==78.1.1 && \
-    pip install --no-cache-dir --prefix=/install -r requirements.txt
+    pip install --prefix=/install --no-cache-dir -r requirements.txt
 
 FROM python:3.11-alpine
+
+# Czyszczenie zależności z innych wersji setuptools
+RUN rm -rf /usr/lib/python3*/site-packages/setuptools* && \
+    rm -rf /usr/local/lib/python3*/dist-packages/setuptools*
 
 COPY --from=builder /install /usr/local
 COPY app /app
